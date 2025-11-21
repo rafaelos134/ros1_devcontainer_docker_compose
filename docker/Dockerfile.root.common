@@ -18,7 +18,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
-RUN usermod -aG sudo ubuntu
+RUN usermod -aG sudo,dialout ubuntu
 
 # install graphic interface
 RUN apt-get install -y \
@@ -78,6 +78,7 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" 
     ros-noetic-realsense2-camera \
     ros-noetic-realsense2-description \
     ros-noetic-gazebo-plugins \
+    ros-noetic-serial \
     python3-catkin-tools \
     python3-rosdep \
     python3-vcstool \
