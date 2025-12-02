@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile.arm64
+    hostname: ros_docker
     ipc: host
     pid: host
     privileged: true

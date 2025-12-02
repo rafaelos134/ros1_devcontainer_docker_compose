@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile.amd64
+    hostname: ros_docker
     ipc: host
     pid: host
     privileged: true
@@ -12,19 +13,20 @@ services:
       - "3080:3080"
       - "3081:3081"
       - "3022:3022"
+      - "11311:11311"
     environment:
-      - DISPLAY=${DISPLAY:-:0}
-      - NVIDIA_DRIVER_CAPABILITIES=all
       - TZ=${TZ:-UTC}
-      - ROS_LOG_DIR=/var/log/val_logger/noetic_devel
       - ROS_MASTER_URI=http://localhost:11311/
       - DEBIAN_FRONTEND=noninteractive
+      - ROS_LOG_DIR=/tmp
     volumes:
       - ${localWorkspaceFolder:-./}local_mount/:/home/ubuntu/ros_ws
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
       - /tmp/.X11-unix:/tmp/.X11-unix
-      - /var/log/val_logger:/var/log/val_logger
+    device_cgroup_rules:
+      - 'c 81:* rmw'
+      - 'c 189:* rmw'
     cap_add:
       - NET_ADMIN
       - SYS_MODULE

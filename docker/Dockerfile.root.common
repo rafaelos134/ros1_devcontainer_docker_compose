@@ -86,13 +86,16 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" 
     python3-rosinstall-generator \
     python3-wstool \
     python3-osrf-pycommon \
+    python3-venv \
     python3-argcomplete
 
 # copy files from host to container
 COPY configs/supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY configs/supervisord/custom_programs.conf /etc/supervisor/conf.d/custom_programs.conf
 COPY configs/supervisord/code_server.conf /etc/supervisor/conf.d/code_server.conf
-COPY configs/xfce4_defaults /usr/share/xfwm4/defaults
+COPY configs/xfce/xfce4_defaults /usr/share/xfwm4/defaults
+RUN mkdir -p "/home/ubuntu/.config/xfce4/xfconf/xfce-perchannel-xml/"
+COPY configs/xfce/xfce4-screensaver.xml /home/ubuntu/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-screensaver.xml
 
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
