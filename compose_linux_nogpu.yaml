@@ -12,9 +12,10 @@ services:
     environment:
       - DISPLAY=${DISPLAY:-:0}
       - TZ=${TZ:-UTC}
-      - ROS_LOG_DIR=/var/log/val_logger/noetic_devel
+      #- ROS_LOG_DIR=/var/log/val_logger/noetic_devel
       - ROS_MASTER_URI=http://localhost:11311/
       - DEBIAN_FRONTEND=noninteractive
+      - ROS_HOSTNAME=localhost
     volumes:
       - ${localWorkspaceFolder:-./}local_mount/:/home/ubuntu/ros_ws
       - /etc/localtime:/etc/localtime:ro
