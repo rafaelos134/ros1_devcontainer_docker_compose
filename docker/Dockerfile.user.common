@@ -1,9 +1,14 @@
 # install code plugins and rosdep dependencies using the default user
 USER $USERNAME
 
-RUN touch /home/ubuntu/.Xauthority
+RUN echo "export PS1='\[\e[38;5;216m\]\u\[\e[38;5;160m\]@\[\e[38;5;202m\]\h \[\e[38;5;131m\]\w \[\033[0m\]$ " >> /home/ubuntu/.bashrc
 
-RUN echo "export PS1='[docker]\[\e[38;5;216m\]\u\[\e[38;5;160m\]@\[\e[38;5;202m\]\h \[\e[38;5;131m\]\w \[\033[0m\]$ '" >> /home/ubuntu/.bashrc
+# prepare virtualenv
+RUN python3 -m venv /home/ubuntu/.py3.8
+RUN echo -e "source /home/ubuntu/.py3.8/bin/activate" >> /home/ubuntu/.bashrc
+RUN source /home/ubuntu/.py3.8/bin/activate && pip install open3d scipy
+
+RUN touch /home/ubuntu/.Xauthority
 
 # TODO: add the git clone command of your repo here
 
