@@ -13,7 +13,7 @@ services:
       - DISPLAY=${DISPLAY:-:0}
       - NVIDIA_DRIVER_CAPABILITIES=all
       - TZ=${TZ:-UTC}
-      - ROS_LOG_DIR=/var/log/val_logger/noetic_devel
+      #- ROS_LOG_DIR=/var/log/val_logger/noetic_devel
       - ROS_MASTER_URI=http://localhost:11311/
       - DEBIAN_FRONTEND=noninteractive
     volumes:

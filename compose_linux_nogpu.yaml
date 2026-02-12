@@ -1,6 +1,6 @@
 services:
   ros1:
-    container_name: ros1_noetic_devel
+    container_name: ros1_noetic_devel_simulacao
     build:
       context: .
       dockerfile: docker/Dockerfile.amd64
